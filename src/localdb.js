@@ -13,6 +13,20 @@
 		return item;
 	};
 
+	var load = function() {
+		var instanceString = localStorage.getItem(this.instanceName);
+		if (instanceString === null) {
+			instanceString = defaultInstance;
+			localStorage.setItem(this.instanceName, defaultInstance);
+		}
+
+		var instance = JSON.parse(instanceString);
+		this.metadata = instance.metadata;
+		for (var i in instance.entries) {
+			this.__addItem(instance.entries[i]);
+		}
+	};
+
 	function LocalDB(name, preprocessor) {
 		if (!name) {
 			throw 'No db name provided';
@@ -35,22 +49,8 @@
 		this.addItem = this.__process(this.__addItem);
 		this.removeItem = this.__process(this.__removeItem);
 
-		this.load();
+		load.call(this);
 	}
-
-	LocalDB.prototype.load = function() {
-		var instanceString = localStorage.getItem(this.instanceName);
-		if (instanceString === null) {
-			instanceString = defaultInstance;
-			localStorage.setItem(this.instanceName, defaultInstance);
-		}
-
-		var instance = JSON.parse(instanceString);
-		this.metadata = instance.metadata;
-		for (var i in instance.entries) {
-			this.__addItem(instance.entries[i]);
-		}
-	};
 
 	LocalDB.prototype.count = function() {
 		return this.entries.length;
