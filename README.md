@@ -41,6 +41,9 @@ The collection also creates internal ids to identify items which are used to ret
 
 The collection publishes changes when ```addItem``` or ```removeItem``` are called.
 
+### Saving the collection to localStorage
+	db.save();
+
 ## Coming Soon
 * Metadata about which entry is currently active. Useful for items like users one of which is active at a time.
 * Getting items by anything except their ids.
@@ -50,6 +53,7 @@ The collection publishes changes when ```addItem``` or ```removeItem``` are call
 Ask me to become a core contributor to the project or send in your pull requests.
 
 ## Release History
+* 2013 May 25 - v0.1.1 - Adding saving of the collection at any time and making some member functions private.
 * 2013 May 24 - v0.1.0 - Implements adding, removing, and getting entries into the named collections. Also adds pub/sub functionality to the mix.
 
 ## License
